@@ -18,3 +18,8 @@ export interface IGraphNode {
 export interface IVisitedGraphNode extends IGraphNode {
   input: number[]; // Массив айдишников тех вершин, по которым нужно пройтись, чтобы попасть в эту.
 }
+
+export interface IAnswer {
+  answer: number[];
+  time_ms: number; // Время выполнения алгоритма в миллисекундах.
+}

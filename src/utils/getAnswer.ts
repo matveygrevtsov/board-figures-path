@@ -1,9 +1,9 @@
-import { iterationCountLimit } from "../config";
-import { ICompletedCell, IVisitedGraphNode } from "../types";
+import { IAnswer, ICompletedCell, IVisitedGraphNode } from "../types";
 import { buildGraph } from "./buildGraph";
 import { getNodeOutputs } from "./getNodeOutputs";
 
-export const getAnswer = (cells: ICompletedCell[]): number[] | undefined => {
+export const getAnswer = (cells: ICompletedCell[]): IAnswer | undefined => {
+  const timeStart = new Date().getMilliseconds();
   const graph = buildGraph(cells);
 
   for (let i = 0; i < graph.length; i++) {
@@ -16,33 +16,24 @@ export const getAnswer = (cells: ICompletedCell[]): number[] | undefined => {
       },
     ];
 
-    let iterationCount = 0;
-
     while (visitedNodes.length) {
-      if (iterationCount === iterationCountLimit) {
-        alert(
-          `Кажется, задача слишком трудоёмкая :( Попробуйте увеличить значение ${iterationCountLimit} и попробовать ещё раз.`
-        );
+      const currentNode = visitedNodes.pop()!;
 
-        return undefined;
-      }
-
-      if (visitedNodes[0].input.length === cells.length) {
-        return visitedNodes[0].input;
+      if (currentNode.input.length === cells.length) {
+        return {
+          answer: currentNode.input,
+          time_ms: new Date().getMilliseconds() - timeStart,
+        };
       }
 
       // Отсеиваем те дочерние вершины, которые уже встречались по пути к этой.
       const outputs = getNodeOutputs(
-        visitedNodes[0],
+        currentNode,
         Math.sqrt(cells.length),
         graph
       );
 
-      visitedNodes.shift();
-
       visitedNodes.push(...outputs);
-
-      ++iterationCount;
     }
   }
   alert(
