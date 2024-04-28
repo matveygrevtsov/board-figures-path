@@ -4,14 +4,14 @@ import { getEmptyBoard } from "./utils/getEmptyBoard";
 import { Board } from "./componnets/Board/Board";
 import { Button, Select, Tooltip } from "antd";
 import { getAnswer } from "./utils/getAnswer";
-import { ICell, ICompletedCell } from "./types";
+import { IAnswer, ICell, ICompletedCell } from "./types";
 
 import styles from "./App.module.css";
 
 interface IState {
   boardSize: number;
   cells: ICell[];
-  answer?: number[];
+  answer?: IAnswer;
 }
 
 const initialState: IState = {
@@ -128,8 +128,14 @@ function App() {
         cells={state.cells}
         onColorChange={handleCellColorChange}
         onFigureChange={handleCellFigureChange}
-        answer={state.answer}
+        answer={state.answer?.answer}
       />
+
+      {state.answer?.time_ms !== undefined && (
+        <div>{`Время выполнения: ${(state.answer.time_ms / 1000).toFixed(
+          2
+        )} сек`}</div>
+      )}
     </div>
   );
 }
