@@ -56,13 +56,6 @@ function App() {
 
     const answer = getAnswer(state.cells as ICompletedCell[]);
 
-    if (!answer) {
-      alert(
-        "Для такого набора ячеек пути не существует. Пожалуйста, проверьте корректность заполнения ячеек."
-      );
-      return;
-    }
-
     setState((prevState) => ({
       ...prevState,
       answer,
