@@ -20,7 +20,10 @@ export const getAnswer = (cells: ICompletedCell[]): number[] | undefined => {
 
     while (visitedNodes.length) {
       if (iterationCount === iterationCountLimit) {
-        console.error(visitedNodes);
+        alert(
+          `Кажется, задача слишком трудоёмкая :( Попробуйте увеличить значение ${iterationCountLimit} и попробовать ещё раз.`
+        );
+
         return undefined;
       }
 
@@ -42,6 +45,9 @@ export const getAnswer = (cells: ICompletedCell[]): number[] | undefined => {
       ++iterationCount;
     }
   }
+  alert(
+    "Для такого набора ячеек пути не существует. Пожалуйста, проверьте корректность заполнения ячеек."
+  );
 
   return undefined;
 };
