@@ -1,0 +1,37 @@
+.root {
+  display: grid;
+  width: 800px;
+  height: 800px;
+}
+
+.root,
+.cell {
+  border: 1px solid gray;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-direction: column;
+  position: relative;
+}
+
+.colorLabel {
+  width: 16px;
+  height: 16px;
+  border: 1px solid gray;
+  border-radius: 50%;
+}
+
+.answer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 255, 0, 0.5);
+  z-index: 1;
+  font-size: 20px;
+}
