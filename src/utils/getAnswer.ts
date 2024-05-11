@@ -27,11 +27,7 @@ export const getAnswer = (cells: ICompletedCell[]): IAnswer | undefined => {
       }
 
       // Отсеиваем те дочерние вершины, которые уже встречались по пути к этой.
-      const outputs = getNodeOutputs(
-        currentNode,
-        Math.sqrt(cells.length),
-        graph
-      );
+      const outputs = getNodeOutputs(currentNode, graph);
 
       visitedNodes.push(...outputs);
     }
